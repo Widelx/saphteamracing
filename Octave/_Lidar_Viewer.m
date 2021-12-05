@@ -1,10 +1,12 @@
 pkg load instrument-control
 
+portCom = "COM10";
+
 if (exist("serialport") != 3)
     disp("No Serial Support");
 endif
 
-s1 = serialport('COM10', 115200);  
+s1 = serialport(portCom, 115200);  
 flush(s1);
 shouldRead = 1;
 dataArray = [double(0), double(0)];
