@@ -4,6 +4,8 @@ Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing,
 
 ************************************************************************************
 Cette librairie permet d'utiliser un capteur LIDAR de la marque SLAMTEC en récupérant un jeu de données au degré prêt dans un tableau fourni par l'utilisateur.
+ATTENTION : le tableau fourni par l'utilisateur doit ABSOLUMENT être de type "float" et de taille 181.
+
 2fonctions sont à utiliser :
 -> initLidar();
 -> getLidarData(tab, enableBluetooth);
