@@ -1,0 +1,102 @@
+#ifndef _Lidar_h_
+#define _Lidar_h_
+
+#include "mbed.h"
+
+/*****Paramètres pouvant être modifiés*****/
+// Lidar TX/RX
+#define TXLIDAR PF_7
+#define RXLIDAR PF_6
+// Bluetooth TX/RX
+#define RXBLE USBRX
+#define TXBLE USBTX
+
+// Taille des buffers,
+#define POINT_BUFFER_SIZE 5000
+#define RAW_BUFFER_SIZE 5000
+#define BLE_BUFFER_SIZE 5000
+
+// Paramètre de la vision du lidar
+#define ANGLE_AVANT_1 270 // Ne devrait pas être inférieur à 210
+#define ANGLE_AVANT_2 90  // Ne devrait pas être supérieur à 150
+
+// Réglgage acquisition du LiDAR
+#define POINT_QUALITY 10 // sans unité
+#define MAX_RANGE 2500   // en mm
+
+// Vitesse de rotation du LiDAR
+#define PWMLIDAR 0.4
+/*****Paramètres pouvant être modifiés*****/
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+/*****NE DEVRAIT PAS ETRE MODIFIE*****/
+// Lidar diverses infos
+#define TAILLE_TRAME 5
+#define TRAME_START 0x20
+#define TRAME_STOP 0x25
+#define PRE_TRAME 0xA5
+#define TRAME_RECEP1 0xA5
+#define TRAME_RECEP2 0x5A
+
+// Précision du tableau de données renvoyées
+// 180 => un point par degré, suffisant !
+// si différent de 180 crash !
+#define PRECISION 180
+#define NULL_VALUE MAX_RANGE + 500
+#define BLE_ENABLE true
+#define BLE_DISABLE false
+/*****NE DEVRAIT PAS ETRE MODIFIE*****/
+
+extern bool fullturn;
+extern CircularBuffer<char, RAW_BUFFER_SIZE> rawBuffer;
+
+struct dataPoints {
+  float angle;
+  float range;
+};
+
+/********Fonction publiques***********/
+// Prend un tableau en entrée et le complète
+void getLidarData(float tab[], bool enableBluetooth);
+// Init
+void initLidar(void);
+void initBLE(void);
+/********Fonction publiques***********/
+/*
+ *
+ *
+ *
+ *
+ *
+ */
+/*******Fonctions PRIVEES******/
+// Ne devraient pas être utilisées
+// Interrupt
+void getChar(void);
+void putData(void);
+
+// Relink
+void relink(void);
+void initConnection(void);
+void stopConnection(void);
+void emptyBuffers(void);
+
+// TreatData
+void convertData(int pointReceived);
+float arrayToAngle(char char1, char char2);
+float arrayToRange(char char3, char char4, float max);
+bool isQualityEnough(char charQ, char qualite);
+float convertAngle(float angle);
+
+// SendData
+void sendToProcess(float tab[]);
+void sendOverBluetooth(float tab[]);
+/*******Fonctions PRIVEES******/
+
+#endif

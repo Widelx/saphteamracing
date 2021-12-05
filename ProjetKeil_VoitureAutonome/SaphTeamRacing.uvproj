@@ -451,6 +451,11 @@
               <FileType>1</FileType>
               <FilePath>.\circular_buffer.c</FilePath>
             </File>
+            <File>
+              <FileName>circular_buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\circular_buffer.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
