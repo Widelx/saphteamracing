@@ -9,8 +9,8 @@ PwmOut PWMLidar(PA_0);
 
 // Variable globale
 bool fullturn;
-// Buffer globaux
 
+// Buffers globaux
 CircularBuffer<dataPoints, POINT_BUFFER_SIZE> pointBuffer;
 CircularBuffer<char, RAW_BUFFER_SIZE> rawBuffer;
 CircularBuffer<char, BLE_BUFFER_SIZE> PcBuffer;
@@ -165,7 +165,6 @@ void convertData(int pointReceived) {
           // Je décode la distance et j'ajoute au buffer
           dataPoint.range = arrayToRange(data[3], data[4], MAX_RANGE);
           pointBuffer.push(dataPoint);
-          // PC.printf("\n\r%5.1f %5.1f", dataPoint.angle, dataPoint.range);
         }
       }
     } else if (dataPoint.angle > 180) {
@@ -183,10 +182,12 @@ void convertData(int pointReceived) {
 }
 
 float arrayToAngle(char char1, char char2) {
+  // Récupère l'angle
   return (float)(char2 << 7 | char1 >> 1) / 64.0;
 }
 
 float arrayToRange(char char3, char char4, float max) {
+  // Bride la distance
   char range;
   range = (float)(char4 << 8 | char3) / 4;
   if (range > max) {
@@ -196,10 +197,12 @@ float arrayToRange(char char3, char char4, float max) {
 }
 
 bool isQualityEnough(char charQ, char qualite) {
+  // Récupère la qualité
   return (((charQ >> 2) & 0x3F) >= qualite);
 }
 
 float convertAngle(float angle) {
+  // Converti les angles pour passer de [270;90] à [0;180]
   if (angle <= 90.0) {
     angle += 90.0;
   } else {
@@ -215,44 +218,50 @@ void sendToProcess(float tab_data[]) {
   for (int i = 0; i <= PRECISION; i++) {
     tab_data[i] = NULL_VALUE;
   }
+  // Déclare les variables
   dataPoints dataPoint;
   pointBuffer.pop(dataPoint);
   while (!(pointBuffer.empty())) {
     if (tab_data[(unsigned int)floor(dataPoint.angle)] == NULL_VALUE) {
+      // Aucun point stocké précédemment, je stock
       tab_data[(unsigned int)floor(dataPoint.angle)] = dataPoint.range;
     } else {
+      // Un point existait déja pour cet angle, je fais la moyene des deux
       tab_data[(unsigned int)floor(dataPoint.angle)] =
           (tab_data[(unsigned int)floor(dataPoint.angle)] + dataPoint.range) /
           2;
     }
     pointBuffer.pop(dataPoint);
   }
+  // Si il existe des valeurs non définies, je prends la valeur du point d'avant
   for (int i = 0; i <= PRECISION; i++) {
     if (tab_data[i] == NULL_VALUE) {
       tab_data[i] = tab_data[i - 1];
     }
-    // PC.printf("\n\rA=%2d, d=%5.1f", i, tab_data[i]);
   }
+  // Reset du buffer point
   pointBuffer.reset();
 }
 
 void sendOverBluetooth(float tab_data[]) {
   unsigned char range1, range2;
   unsigned short range;
-  // PC.printf("\n\rNew turn : ");
+  // Je converti les données de distance sur un short pour ne pas trop perdre en
+  // précision
   for (int i = 0; i <= PRECISION; i++) {
     range = (unsigned short)(tab_data[i] * 10);
     range1 = (unsigned char)range & 0xFF;
     range2 = (unsigned char)(range >> 8) & 0xFF;
-    // PC.printf("\n\rtab = %5.1f Range = %d, Range1 = %d ,range2 = %d",
-    // tab_data[i], range, range1, range2);
+    // J'ajoute les valeurs au buffer
     PcBuffer.push(range1);
     PcBuffer.push(range2);
     PcBuffer.push((unsigned char)i);
   }
+  // Fin de trame
   PcBuffer.push(0xA5);
   PcBuffer.push(0xA5);
   PcBuffer.push(0xA5);
+  // Autorise l'interruption sur TX
   BLE.enable_output(true);
 }
 /*****************SendData******************/

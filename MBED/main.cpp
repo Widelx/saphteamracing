@@ -1,7 +1,9 @@
-#include "Lidar.h"
 #include "mbed.h"
 #include <cstdio>
 #include <string>
+
+#include "Car.h"
+#include "Lidar.h"
 
 int main() {
   float data[181];
@@ -11,3 +13,4 @@ int main() {
     getLidarData(data, BLE_ENABLE);
   }
 }
+
