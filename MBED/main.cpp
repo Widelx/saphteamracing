@@ -2,15 +2,16 @@
 #include <cstdio>
 #include <string>
 
-#include "Car.h"
-#include "Lidar.h"
+#include "bluetooth.h"
+#include "car.h"
+#include "lidar.h"
 
 int main() {
   float data[181];
   initLidar();
   initBLE();
   while (1) {
-    getLidarData(data, BLE_ENABLE);
+    getLidarData(data);
+    sendOverBluetooth(data);
   }
 }
-

@@ -1,10 +1,7 @@
-#include "Lidar.h"
-#include <cstdio>
-#include <string>
+#include "lidar.h"
 
 // Instances du programme
 RawSerial SLidar(TXLIDAR, RXLIDAR, 115200);
-RawSerial BLE(TXBLE, RXBLE, 115200);
 PwmOut PWMLidar(PA_0);
 
 // Variable globale
@@ -13,9 +10,8 @@ bool fullturn;
 // Buffers globaux
 CircularBuffer<dataPoints, POINT_BUFFER_SIZE> pointBuffer;
 CircularBuffer<char, RAW_BUFFER_SIZE> rawBuffer;
-CircularBuffer<char, BLE_BUFFER_SIZE> PcBuffer;
 
-void getLidarData(float tab[], bool enableBluetooth) {
+void getLidarData(float tab[]) {
   int pointNumber = 0;
   // Etabli la connection
   relink();
@@ -31,12 +27,8 @@ void getLidarData(float tab[], bool enableBluetooth) {
   }
   // Pré-process les données pour correspondre au format demandé
   sendToProcess(tab);
-
-  // Envoie via la liaison bluetooth si activé
-  if (enableBluetooth) {
-    sendOverBluetooth(tab);
-  }
-  // Les données stockées dans le tableau donné en entrée sont analysables
+  // Les données stockées dans le tableau donné en entrée sont désormais
+  // analysables
 }
 
 /******************Init*********************/
@@ -50,13 +42,6 @@ void initLidar(void) {
   // Défini l'interruption sur reception de caractères
   SLidar.attach(&getChar, Serial::RxIrq);
 }
-
-void initBLE(void) {
-  // Défini le formats de la liaison série
-  BLE.format(8, SerialBase::None, 1);
-  // Défini l'interruption sur reception de caractères
-  BLE.attach(&putData, Serial::TxIrq);
-}
 /******************Init*********************/
 
 /*****************Interrupts****************/
@@ -65,19 +50,6 @@ void getChar(void) {
   // prévu à cet effet
   while (SLidar.readable()) {
     rawBuffer.push((char)SLidar.getc());
-  }
-}
-
-void putData(void) {
-  char ConsumeChar;
-  while (BLE.writeable() && (!(PcBuffer.empty()))) {
-    // envoie un caractère si c'est possible et que le buffer n'est pas vide
-    PcBuffer.pop(ConsumeChar);
-    BLE.putc(ConsumeChar);
-  }
-  if (PcBuffer.empty()) {
-    // Si le buffer est vide (plus de données) j'arrête les interruptions sur TX
-    BLE.enable_output(false);
   }
 }
 /*****************Interrupts****************/
@@ -241,27 +213,5 @@ void sendToProcess(float tab_data[]) {
   }
   // Reset du buffer point
   pointBuffer.reset();
-}
-
-void sendOverBluetooth(float tab_data[]) {
-  unsigned char range1, range2;
-  unsigned short range;
-  // Je converti les données de distance sur un short pour ne pas trop perdre en
-  // précision
-  for (int i = 0; i <= PRECISION; i++) {
-    range = (unsigned short)(tab_data[i] * 10);
-    range1 = (unsigned char)range & 0xFF;
-    range2 = (unsigned char)(range >> 8) & 0xFF;
-    // J'ajoute les valeurs au buffer
-    PcBuffer.push(range1);
-    PcBuffer.push(range2);
-    PcBuffer.push((unsigned char)i);
-  }
-  // Fin de trame
-  PcBuffer.push(0xA5);
-  PcBuffer.push(0xA5);
-  PcBuffer.push(0xA5);
-  // Autorise l'interruption sur TX
-  BLE.enable_output(true);
 }
 /*****************SendData******************/

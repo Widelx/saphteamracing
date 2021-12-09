@@ -1,5 +1,5 @@
-#ifndef _Lidar_h_
-#define _Lidar_h_
+#ifndef _lidar_h_
+#define _lidar_h_
 
 #include "mbed.h"
 
@@ -7,14 +7,10 @@
 // Lidar TX/RX
 #define TXLIDAR PF_7
 #define RXLIDAR PF_6
-// Bluetooth TX/RX
-#define RXBLE USBRX
-#define TXBLE USBTX
 
 // Taille des buffers,
 #define POINT_BUFFER_SIZE 5000
 #define RAW_BUFFER_SIZE 5000
-#define BLE_BUFFER_SIZE 5000
 
 // Paramètre de la vision du lidar
 #define ANGLE_AVANT_1 270 // Ne devrait pas être inférieur à 210
@@ -49,8 +45,6 @@
 // si différent de 180 crash !
 #define PRECISION 180
 #define NULL_VALUE MAX_RANGE + 500
-#define BLE_ENABLE true
-#define BLE_DISABLE false
 /*****NE DEVRAIT PAS ETRE MODIFIE*****/
 
 extern bool fullturn;
@@ -61,13 +55,12 @@ struct dataPoints {
   float range;
 };
 
-/********Fonction publiques***********/
+/********Fonctions publiques**********/
 // Prend un tableau en entrée et le complète
-void getLidarData(float tab[], bool enableBluetooth);
+void getLidarData(float tab[]);
 // Init
 void initLidar(void);
-void initBLE(void);
-/********Fonction publiques***********/
+/********Fonctions publiques**********/
 /*
  *
  *
@@ -79,7 +72,6 @@ void initBLE(void);
 // Ne devraient pas être utilisées
 // Interrupt
 void getChar(void);
-void putData(void);
 
 // Relink
 void relink(void);
@@ -96,7 +88,6 @@ float convertAngle(float angle);
 
 // SendData
 void sendToProcess(float tab[]);
-void sendOverBluetooth(float tab[]);
 /*******Fonctions PRIVEES******/
 
 #endif
