@@ -18,7 +18,7 @@ void turn(float angle) {
   } else if (angle < ANGLE_ROUE_MIN) {
     angle = ANGLE_ROUE_MIN;
   }
-  anglePWM = -0.00045 * angle + 0.0765;
+  anglePWM = 0.0613636363636 * angle + 7.65;
   turnWheel.write(anglePWM);
 }
 

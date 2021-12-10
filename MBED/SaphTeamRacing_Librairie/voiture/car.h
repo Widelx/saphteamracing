@@ -3,8 +3,8 @@
 
 #include "mbed.h"
 
-#define ANGLE_ROUE_MIN -30
-#define ANGLE_ROUE_MAX 30
+#define ANGLE_ROUE_MIN -22
+#define ANGLE_ROUE_MAX 22
 #define MAX_FORWARD_SPEED 1.0
 #define MAX_BACKWARD_SPEED 1.0
 
