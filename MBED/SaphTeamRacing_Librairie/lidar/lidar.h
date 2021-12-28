@@ -22,6 +22,7 @@
 
 // Vitesse de rotation du LiDAR
 #define PWMLIDAR 0.4
+#define PIN_PWM PA_0
 /*****Paramètres pouvant être modifiés*****/
 /*
  *
@@ -46,9 +47,6 @@
 #define PRECISION 180
 #define NULL_VALUE MAX_RANGE + 500
 /*****NE DEVRAIT PAS ETRE MODIFIE*****/
-
-extern bool fullturn;
-extern CircularBuffer<char, RAW_BUFFER_SIZE> rawBuffer;
 
 struct dataPoints {
   float angle;

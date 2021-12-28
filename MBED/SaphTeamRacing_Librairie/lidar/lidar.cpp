@@ -2,7 +2,7 @@
 
 // Instances du programme
 RawSerial SLidar(TXLIDAR, RXLIDAR, 115200);
-PwmOut PWMLidar(PA_0);
+PwmOut PWMLidar(PIN_PWM);
 
 // Variable globale
 bool fullturn;
@@ -59,7 +59,6 @@ void relink(void) {
   // Etabli une nouvelle connection
   // via les fonctions suivantes
   stopConnection();
-  emptyBuffers();
   initConnection();
 }
 
@@ -85,13 +84,13 @@ void initConnection(void) {
     char1 = char2;
     rawBuffer.pop(char2);
   } while (!(char1 == TRAME_RECEP1 && char2 == TRAME_RECEP2));
-  // Consomme les 5premiers caractères de la trame (le premier point)
-  // Qui ne correspondent pas à une réelle mesure (poubelle)
+  // Consomme les 5premiers caractères de la trame (la réponse du Lidar à
+  // l'instruction)
   do {
-    while (!(SLidar.readable()))
-      ;
-    rawBuffer.pop(consumeChar);
-    i++;
+    if (!rawBuffer.empty()) {
+      rawBuffer.pop(consumeChar);
+      i++;
+    }
   } while (i != TAILLE_TRAME);
 }
 
@@ -155,13 +154,13 @@ void convertData(int pointReceived) {
 
 float arrayToAngle(char char1, char char2) {
   // Récupère l'angle
-  return (float)(char2 << 7 | char1 >> 1) / 64.0;
+  return (float)((int)char2 << 7 | (int)char1 >> 1) / 64.0;
 }
 
 float arrayToRange(char char3, char char4, float max) {
   // Bride la distance
   char range;
-  range = (float)(char4 << 8 | char3) / 4;
+  range = (float)((int)char4 << 8 | (int)char3) / 4;
   if (range > max) {
     range = max;
   }
