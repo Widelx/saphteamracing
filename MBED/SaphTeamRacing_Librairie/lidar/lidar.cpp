@@ -157,19 +157,19 @@ float arrayToAngle(char char1, char char2) {
   return (float)((int)char2 << 7 | (int)char1 >> 1) / 64.0;
 }
 
-float arrayToRange(char char3, char char4, float max) {
+float arrayToRange(char char3, char char4) {
   // Bride la distance
-  char range;
+  int range;
   range = (float)((int)char4 << 8 | (int)char3) / 4;
-  if (range > max) {
-    range = max;
+  if (range > MAX_RANGE) {
+    range = MAX_RANGE;
   }
   return range;
 }
 
-bool isQualityEnough(char charQ, char qualite) {
+bool isQualityEnough(char charQ) {
   // Récupère la qualité
-  return (((charQ >> 2) & 0x3F) >= qualite);
+  return (((charQ >> 2) & 0x3F) >= POINT_QUALITY);
 }
 
 float convertAngle(float angle) {

@@ -12,10 +12,6 @@
 #define POINT_BUFFER_SIZE 5000
 #define RAW_BUFFER_SIZE 5000
 
-// Paramètre de la vision du lidar
-#define ANGLE_AVANT_1 270 // Ne devrait pas être inférieur à 210
-#define ANGLE_AVANT_2 90  // Ne devrait pas être supérieur à 150
-
 // Réglgage acquisition du LiDAR
 #define POINT_QUALITY 10 // sans unité
 #define MAX_RANGE 2500   // en mm
@@ -46,6 +42,10 @@
 // si différent de 180 crash !
 #define PRECISION 180
 #define NULL_VALUE MAX_RANGE + 500
+
+// Paramètre de la vision du lidar
+#define ANGLE_AVANT_1 270
+#define ANGLE_AVANT_2 90
 /*****NE DEVRAIT PAS ETRE MODIFIE*****/
 
 struct dataPoints {
