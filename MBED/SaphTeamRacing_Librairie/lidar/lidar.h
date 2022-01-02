@@ -17,7 +17,7 @@
 #define MAX_RANGE 2500   // en mm
 
 // Vitesse de rotation du LiDAR
-#define PWMLIDAR 0.4
+#define PWMLIDAR 0.3
 #define PIN_PWM PA_0
 /*****Paramètres pouvant être modifiés*****/
 /*
@@ -80,12 +80,12 @@ void emptyBuffers(void);
 // TreatData
 void convertData(int pointReceived);
 float arrayToAngle(char char1, char char2);
-float arrayToRange(char char3, char char4, float max);
-bool isQualityEnough(char charQ, char qualite);
+float arrayToRange(char char3, char char4);
+bool isQualityEnough(char charQ);
 float convertAngle(float angle);
 
 // SendData
-void sendToProcess(float tab[]);
+void sendToProcess(float* tab_data);
 /*******Fonctions PRIVEES******/
 
 #endif

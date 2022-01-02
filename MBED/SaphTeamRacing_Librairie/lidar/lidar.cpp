@@ -128,26 +128,24 @@ void convertData(int pointReceived) {
             dataPoint.angle <= ANGLE_AVANT_2)) &&
           second_quart == 1) {
         // Je prend ce point et le décode si il concerne l'avant du lidar.
-        if (isQualityEnough(data[0], POINT_QUALITY)) {
+        if (isQualityEnough(data[0])) {
           // Si la qualité est suffisante
           // Je transforme l'angle pour qu"il soit compris entre 0 et 180 (a la
           // base entre 270 et 90)
           dataPoint.angle = convertAngle(dataPoint.angle);
           // Je décode la distance et j'ajoute au buffer
-          dataPoint.range = arrayToRange(data[3], data[4], MAX_RANGE);
+          dataPoint.range = arrayToRange(data[3], data[4]);
           pointBuffer.push(dataPoint);
         }
       }
     } else if (dataPoint.angle > 180) {
       second_quart = 1;
-    } else {
-      if (second_quart == 1 && pointBuffer.size() >= 10) {
-        second_quart = 0;
-        fullturn = true;
-        stopConnection();
-        rawBuffer.reset();
-        break;
-      }
+    } else if (second_quart == 1 && pointBuffer.size() >= 10) {
+      second_quart = 0;
+      fullturn = true;
+      stopConnection();
+      rawBuffer.reset();
+      break;
     }
   }
 }
@@ -184,7 +182,7 @@ float convertAngle(float angle) {
 /*****************TreatData*****************/
 
 /*****************SendData******************/
-void sendToProcess(float tab_data[]) {
+void sendToProcess(float *tab_data) {
   // Réinitialise les données du tableau
   for (int i = 0; i <= PRECISION; i++) {
     tab_data[i] = NULL_VALUE;
