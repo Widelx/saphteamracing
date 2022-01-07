@@ -1,7 +1,7 @@
 #include "car.h"
 
-PwmOut drivingWheel(PB_8);
-PwmOut turnWheel(PC_7);
+PwmOut drivingWheel(PIN_DRIVING);
+PwmOut turnWheel(PIN_TURN);
 
 // A faire : brider les accélérations trop violentes (et les freinages ?) !!!!
 // Variables static de vitesse et variable de vitesse désirée
@@ -18,31 +18,33 @@ void turn(float angle) {
   } else if (angle < ANGLE_ROUE_MIN) {
     angle = ANGLE_ROUE_MIN;
   }
-  anglePWM = 0.0613636363636 * angle + 7.65;
+  anglePWM = -0.0006428571429 * angle + 0.0765;
   turnWheel.write(anglePWM);
 }
 
 // Valeur de vitesse entre 0 et 100%
 void speed(float speed, bool forward) {
   float speedPWM;
+  static bool state = true;
+
+  if (forward != state) {
+    drivingWheel.write(0);
+    state = forward;
+  }
   // Sature les valeurs minimales
-  if (speed < 0) {
-    speed = 0;
+  if (speed < MIN_SPEED) {
+    speed = MIN_SPEED;
+  }
+  if (speed > MAX_SPEED) {
+    speed = MAX_SPEED;
   }
   if (forward) {
-    // Si avance, sature selon la vitesse max avant
-    if (speed > MAX_FORWARD_SPEED) {
-      speed = MAX_FORWARD_SPEED;
-    }
     // Applique le bon calcul de la vitesse
-    speedPWM = -0.048 * speed + 0.08;
+    speedPWM = -0.00022 * speed + 0.08;
   } else {
-    // Si n'avance pas (recule), sature selon la vitesse max arrière
-    if (speed > MAX_BACKWARD_SPEED) {
-      speed = MAX_BACKWARD_SPEED;
-    }
+    // Si n'avance pas (recule), sature selon la vitesse max arriÃ¨re
     // Applique le bon calcul de la vitesse
-    speedPWM = 0.012 * speed + 0.08;
+    speedPWM = 0.00012 * speed + 0.08;
   }
   // Applique le PWM de la vitesse en sortie
   drivingWheel.write(speedPWM);
