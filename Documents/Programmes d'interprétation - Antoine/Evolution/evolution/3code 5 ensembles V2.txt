@@ -1,0 +1,264 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define taille 181
+
+double ligne_droite(double tab[taille]);
+double multiverse(double tab[taille]);
+
+void affiche_ensembles(int nb,int a,int b,int c,int d,int e,int f);
+
+int val_max(int a, int b,int c,int d,int e);
+
+int main(void)
+    {
+    int ensemble_0= 0,ensemble_1=777, ensemble_2=777, ensemble_3=777, ensemble_4=777,ensemble_5=777,i,cs=0;
+    int vide_origine, vide_fin,vide_origine1, vide_fin1,vide_origine2, vide_fin2,vide_origine3, vide_fin3;
+    int vide_origine4, vide_fin4,vide_origine5, vide_fin5,verif=0, signe;
+
+    int largeur_vide1=0,largeur_vide2=0,largeur_vide3=0,largeur_vide4=0,largeur_vide5=0;
+
+    double valeur,angle_roues,x,y;
+
+    double tab[taille],test[taille];
+    //ligne_droite(tab);
+    multiverse(tab);
+
+        for(i=1; i!=taille; i++){
+
+                valeur =((tab[i])/(tab[i+1]));
+
+                printf("i = %d\t\t\t tab i = %lf\t\t valeur = %lf",i,tab[i], valeur);
+
+                if(verif == 9){largeur_vide5+=1;}
+                if(verif == 7){largeur_vide4+=1;}
+                if(verif == 5){largeur_vide3+=1;}
+                if(verif == 3){largeur_vide2+=1;}
+                if(verif == 1){largeur_vide1+=1;}
+
+                printf("\t%d \t%d \t%d \t%d \t%d",largeur_vide1,largeur_vide2,largeur_vide3,largeur_vide4,largeur_vide5);
+
+
+                if((verif == 9)&&(tab[i] != -1)){
+                    vide_fin1=i;verif =10;
+                }
+
+                if((verif == 7)&&(tab[i] != -1)){
+                    vide_fin1=i;verif =8;
+                }
+
+                if((verif == 5)&&(tab[i] != -1)){
+                    vide_fin1=i;verif =6;
+                }
+
+                if((verif == 3)&&(tab[i] != -1)){
+                    vide_fin1=i;verif =4;
+                }
+
+                if((verif == 1)&&(tab[i] != -1)){
+                    vide_fin1=i;verif =2;
+                }
+
+
+                if (tab[i] == -1)
+                    {
+                    printf("                 vide\n");
+
+                    if(verif ==8){vide_origine5=i;verif =9;}
+                    if(verif ==6){vide_origine4=i;verif =7;}
+                    if(verif ==4){vide_origine3=i;verif =5;}
+                    if(verif ==2){vide_origine2=i;verif =3;}
+                    if(verif ==0){vide_origine1=i;verif =1;}
+
+                    }
+                else
+                    {
+                    printf("\n");
+                    }
+
+                if ((cs == 4) &&(!((valeur<1.05)&&(valeur>0.95)))){
+                            ensemble_5 = i;
+                            //printf("\n\t%d\t%lf\n\n",ensemble_5,tab[i]);
+                    cs = 5;
+                }
+                if ((cs == 3) &&(!((valeur<1.05)&&(valeur>0.95)))){
+                            ensemble_4 = i;
+                            //printf("\n\t%d\t%lf\n\n",ensemble_4,tab[i]);
+                    cs = 4;
+                }
+                if ((cs == 2) &&(!((valeur<1.05)&&(valeur>0.95)))){
+                            ensemble_3 = i;
+                            //printf("\n\t%d\t%lf\n\n",ensemble_3,tab[i]);
+                    cs = 3;
+                }
+                if ((cs == 1) &&(!((valeur<1.05)&&(valeur>0.95)))){
+                            ensemble_2 = i;
+                            //printf("\n\t%d\t%lf\n\n",ensemble_2,tab[i]);
+                    cs = 2;
+
+                }
+                if ((cs == 0) &&(!((valeur<1.05)&&(valeur>0.95)))){
+                            ensemble_1 = i;
+                            //printf("\n\t%d\t%lf\n\n",ensemble_1,tab[i]);
+                    cs = 1;
+                }
+        }
+
+    if (largeur_vide1 > largeur_vide2 )
+    {
+            if(largeur_vide1 > largeur_vide3)
+            {
+                if(largeur_vide1 > largeur_vide4)
+                {
+                    if(largeur_vide1 > largeur_vide5)
+                        {vide_origine = vide_origine1;vide_fin = vide_fin1;}
+                }
+            }
+    }
+    if (largeur_vide2 > largeur_vide1 )
+    {
+            if(largeur_vide2 > largeur_vide3)
+            {
+                if(largeur_vide2 > largeur_vide4)
+                {
+                    if(largeur_vide2 > largeur_vide5){vide_origine = vide_origine2;vide_fin = vide_fin2;}
+                }
+            }
+    }
+    if (largeur_vide3 > largeur_vide1 )
+    {
+            if(largeur_vide3 > largeur_vide2)
+            {
+                if(largeur_vide3 > largeur_vide4)
+                {
+                    if(largeur_vide3 > largeur_vide5){vide_origine = vide_origine3;vide_fin = vide_fin3;}
+                }
+            }
+    }
+    if (largeur_vide4 > largeur_vide1 )
+    {
+            if(largeur_vide4 > largeur_vide2)
+            {
+                if(largeur_vide4 > largeur_vide3)
+                {
+                    if(largeur_vide4 > largeur_vide5){vide_origine = vide_origine4;vide_fin = vide_fin4;}
+                }
+            }
+    }
+     if (largeur_vide5 > largeur_vide1 )
+    {
+            if(largeur_vide5 > largeur_vide2)
+            {
+                if(largeur_vide5 > largeur_vide3)
+                {
+                    if(largeur_vide5 > largeur_vide4){vide_origine = vide_origine5;vide_fin = vide_fin5;}
+                }
+            }
+    }
+
+
+
+
+
+
+    affiche_ensembles(cs,ensemble_0,ensemble_1, ensemble_2, ensemble_3, ensemble_4,ensemble_5);
+
+
+    x =  (tab[vide_origine-1] - tab[vide_fin]);
+    y = (vide_fin + vide_origine)/2;
+
+    if ((vide_origine - vide_fin)<0){signe=-1;}
+    else {signe=1;}
+
+    angle_roues = ((90 - (((asin(y/(sqrt(x*x + y*y))))*360)/(2*3.141592653589)))*signe);
+    printf("\nangle %lf\n",angle_roues);
+    printf("\n\nlargeur_vide1 = %d\n\n",largeur_vide1);
+
+    printf("\nvide_o %d \t vide_f  %d\n\n",vide_origine,vide_fin);
+    return 0;
+    }
+
+
+double ligne_droite(double tab[taille]){
+    int i;
+    for(i=0; i!=taille;i++)
+        {
+        if((i >= 70)&&(i<=110))
+            {tab[i] =-1;}
+        else {
+            if (i<70)
+                {tab[i] =  1*i +1 +100;}
+            if (i> taille-1 -70)
+                {tab[i] = taille- i + 100;}
+
+            }
+        //printf("i=%d    %lf\n",i,tab[i]);
+        //printf("        %d\n",i);
+        }
+    }
+
+double multiverse(double tab[taille]){
+    int i;
+    for(i=0; i!=taille;i++)
+        {
+        if(((i >= 50)&&(i<=60))||((i >= 110)&&(i<=150)))
+            {tab[i] =-1;}
+        else {
+            if (i<50)
+                {tab[i] =  i +1 +100;}
+            if ((i>60)&&(i < 110))
+                {tab[i] =  140;}
+            if (i> 150)
+                {tab[i] = taille- i + 100;}
+
+            }
+        printf("i=%d    %lf\n",i,tab[i]);
+        printf("        %d\n",i);
+        }
+    }
+
+void affiche_ensembles(int nb,int a,int b,int c,int d,int e,int f){
+
+    //printf("il y a [ %d ] ensembles :\n\n",nb);
+
+
+    if (nb == 1) {
+         printf("ensemble 1 de i = %d a i = %d\n",a,b);}
+    if (nb == 2) {
+        printf("ensemble 1 de i = %d a i = %d\n",a,b);
+        printf("ensemble 2 de i = %d a i = %d\n",b,c);}
+    if (nb == 3) {
+        printf("ensemble 1 de i = %d a i = %d\n",a,b);
+        printf("ensemble 2 de i = %d a i = %d\n",b,c);
+        printf("ensemble 3 de i = %d a i = %d\n",c,d);}
+    if (nb == 4) {
+        printf("ensemble 1 de i = %d a i = %d\n",a,b);
+        printf("ensemble 2 de i = %d a i = %d\n",b,c);
+        printf("ensemble 3 de i = %d a i = %d\n",c,d);
+        printf("ensemble 4 de i = %d a i = %d\n",d,e);}
+    if (nb == 5) {
+        printf("ensemble 1 de i = %d a i = %d\n",a,b);
+        printf("ensemble 2 de i = %d a i = %d\n",b,c);
+        printf("ensemble 3 de i = %d a i = %d\n",c,d);
+        printf("ensemble 4 de i = %d a i = %d\n",d,e);
+        printf("ensemble 5 de i = %d a i = %d\n",e,f);}
+
+}
+
+int val_max(int a, int b,int c,int d,int e){
+int x,y,z,result;
+
+if(a<b){x=b;}
+else{x=a;}
+
+if(c<d){y=d;}
+else{y=c;}
+
+if(x>y){z=x;}
+else{z=y;}
+
+if(z<e){return e;}
+else{return z;}
+
+}

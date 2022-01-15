@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define PORTEE 100.0
+/*
+
+    vitesse          08% = 0                     3,2% = rapide
+    angle           6,3% = droite     7.65         9% = gauche
+
+
+*/
+void LECTURE (void);
+
+float Droite, Gauche, Devant;
+
+int main()
+{
+unsigned char choix=0, cs,i,j;
+float angle=7.65, vitesse=0;
+Droite =100 ;
+Gauche = 100;
+Devant = 100;
+
+float mem0 = 0, mem1 = 0, mem2 = 0;
+for(j=0;j!=200;j++)//while(1)
+{
+
+
+//LECTURE();  // lecture capteurs droit
+
+for(i=0;i!=4;i++)
+{
+ switch(cs){
+
+                case 0:{
+                    if (Droite > Gauche){choix = 10;}           // tourne a droite
+                    else{cs++;}
+                    break;}
+
+                case 1:{
+                    if (Gauche > Droite){choix = 20;}           // tourne a  gauche
+                    else{cs++;}
+                    break;
+                }
+                case 2:{
+                    if (Devant < (PORTEE / 2.0))
+                        {
+                          if (Droite > Gauche){choix = 11;}     //tourne a droite fort
+                          else{choix = 22;}                     //tourne a gauche fort
+                        }
+                    else{cs++;}
+                    break;
+                }
+ }
+}//fin for
+cs = 0;
+
+ switch(choix){
+
+                case 10:{
+                    angle -= 0.01 ;             // tourne a droite +
+                    break;}
+
+                case 11:{
+                    angle -= 0.03 ;             // tourne a droite +++
+                    break;}
+
+                case 20:{
+                    angle += 0.01 ;             // tourne a gauche +
+                    break;}
+
+                case 22:{
+                   angle += 0.03 ;             // tourne a gauche +++
+                    break;}
+
+                }
+
+
+if(angle < 5.9){angle = 5.9;}
+if(angle > 8.8){angle = 8.8;}
+
+vitesse = 7.65 - angle;
+if(vitesse < 0){vitesse = -vitesse;}                // vitesse comprise entre 0 et 1.35
+vitesse = (vitesse *100.0)/1.75;                      // vitesse comprise entre 0 et 100
+vitesse -= (1.0 - (Devant /100.0)) ;                   //  a ce niveau vitesse se trouve a 0 lorsqu un obstacle est proche et a 1,35 lorsque il est loin         vitesse en %      0 lent   100 rapide                 //
+//vitesse = vitesse / 4.0;
+//printf("%lf\n",vitesse);
+
+mem2 = mem1;
+mem1 = mem0;
+mem0 = vitesse;
+
+
+vitesse = (mem0 + mem1 + mem2)/3.0;
+printf("%lf\n",vitesse);
+Gauche -=1;
+//if(Gauche <= 70.0 ){Gauche = 100.0;}
+//getchar();
+} //fin while
+
+    return 0;
+}
+void LECTURE (void)
+{
+Droite =100 ;
+Gauche =100;
+Devant = 100;
+
+}

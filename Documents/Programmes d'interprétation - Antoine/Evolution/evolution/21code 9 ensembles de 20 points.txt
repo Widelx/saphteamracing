@@ -1,0 +1,299 @@
+#include "mbed.h"
+#include <cstdio>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+#define taille 181
+
+//#include "bluetooth.h"
+#include "car.h"
+
+Serial PC(USBTX,USBRX, 9600);
+#include "lidar.h"
+
+
+struct datapoint {
+
+    float angle;
+    float distance;
+    int ensemble;
+};
+
+float lissage(float tab[taille]);
+float cut10(float tab[181]);
+float cut5(float tab[181]);
+
+int main()
+{
+    initWheels();
+    turn(0);
+
+
+
+    int i,o,k;
+
+
+
+
+    float tab0[181],Angle,angle_roues_final;
+    float a,b,c,cheh=0.0;
+    float g,tab2[18],angle =0.0;
+
+    datapoint tab_data[181];
+
+    initLidar();
+    //  initBLE();
+
+    while (1) {
+        getLidarData(tab0);
+   //     lissage(tab0);
+        a = tab0[45];
+        b = tab0[90];
+        c = tab0[135];
+        //  sendOverBluetooth(data);
+        datapoint CePoint;
+
+        for(i=0; i!=taille+1; i++) {
+            tab_data[i].distance = tab0[i];
+            tab_data[i].angle = i;
+            tab_data[i].ensemble = 0;
+        }//fin for(i=1; i!=taille+1; i++)
+
+
+
+for(i=0;i!=10;i++){tab2[i]=0.0;}
+
+        for(k=0; k!=181; k++) {
+            if((k>=0)&&(k<20)) {
+                tab2[0]+=tab0[k];
+            }
+
+            if((k>=20)&&(k<40)) {
+                tab2[1]+=tab0[k];
+            }
+
+            if((k>=40)&&(k<60)) {
+                tab2[2]+=tab0[k];
+            }
+
+            if((k>=60)&&(k<80)) {
+                tab2[3]+=tab0[k];
+            }
+
+            if((k>=80)&&(k<100)) {
+                tab2[4]+=tab0[k];
+            }
+
+            if((k>=100)&&(k<120)) {
+                tab2[5]+=tab0[k];
+            }
+
+            if((k>=120)&&(k<140)) {
+                tab2[6]+=tab0[k];
+            }
+
+            if((k>=140)&&(k<160)) {
+                tab2[7]+=tab0[k];
+            }
+
+            if((k>=160)&&(k<180)) {
+                tab2[8]+=tab0[k];
+            }
+
+
+        }
+        if(tab2[0]>tab2[1]) {
+            if(tab2[0]>tab2[2]) {
+                if(tab2[0]>tab2[3]) {
+                    if(tab2[0]>tab2[4]) {
+                        if(tab2[0]>tab2[5]) {
+                            if(tab2[0]>tab2[6]) {
+                                if(tab2[0]>tab2[7]) {
+                                    if(tab2[0]>tab2[8]) {
+                                        cheh = -22.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[1]>tab2[0]) {
+            if(tab2[1]>tab2[2]) {
+                if(tab2[1]>tab2[3]) {
+                    if(tab2[1]>tab2[4]) {
+                        if(tab2[1]>tab2[5]) {
+                            if(tab2[1]>tab2[6]) {
+                                if(tab2[1]>tab2[7]) {
+                                    if(tab2[1]>tab2[8]) {
+                                        cheh = -17.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[2]>tab2[0]) {
+            if(tab2[2]>tab2[1]) {
+                if(tab2[2]>tab2[3]) {
+                    if(tab2[2]>tab2[4]) {
+                        if(tab2[2]>tab2[5]) {
+                            if(tab2[2]>tab2[6]) {
+                                if(tab2[2]>tab2[7]) {
+                                    if(tab2[2]>tab2[8]) {
+                                        cheh = -11.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[3]>tab2[0]) {
+            if(tab2[3]>tab2[1]) {
+                if(tab2[3]>tab2[2]) {
+                    if(tab2[3]>tab2[4]) {
+                        if(tab2[3]>tab2[5]) {
+                            if(tab2[3]>tab2[6]) {
+                                if(tab2[3]>tab2[7]) {
+                                    if(tab2[3]>tab2[8]) {
+                                        cheh = -6.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[4]>tab2[0]) {
+            if(tab2[4]>tab2[1]) {
+                if(tab2[4]>tab2[2]) {
+                    if(tab2[4]>tab2[3]) {
+                        if(tab2[4]>tab2[5]) {
+                            if(tab2[4]>tab2[6]) {
+                                if(tab2[4]>tab2[7]) {
+                                    if(tab2[4]>tab2[8]) {
+                                        cheh = 0.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[5]>tab2[0]) {
+            if(tab2[5]>tab2[1]) {
+                if(tab2[5]>tab2[2]) {
+                    if(tab2[5]>tab2[3]) {
+                        if(tab2[5]>tab2[4]) {
+                            if(tab2[5]>tab2[6]) {
+                                if(tab2[5]>tab2[7]) {
+                                    if(tab2[5]>tab2[8]) {
+                                        cheh = 6.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[6]>tab2[0]) {
+            if(tab2[6]>tab2[1]) {
+                if(tab2[6]>tab2[2]) {
+                    if(tab2[6]>tab2[3]) {
+                        if(tab2[6]>tab2[4]) {
+                            if(tab2[6]>tab2[5]) {
+                                if(tab2[6]>tab2[7]) {
+                                    if(tab2[6]>tab2[8]) {
+                                        cheh = 11.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[7]>tab2[0]) {
+            if(tab2[7]>tab2[1]) {
+                if(tab2[7]>tab2[2]) {
+                    if(tab2[7]>tab2[3]) {
+                        if(tab2[7]>tab2[4]) {
+                            if(tab2[7]>tab2[5]) {
+                                if(tab2[7]>tab2[6]) {
+                                    if(tab2[7]>tab2[8]) {
+                                        cheh = 17.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(tab2[8]>tab2[0]) {
+            if(tab2[8]>tab2[1]) {
+                if(tab2[8]>tab2[2]) {
+                    if(tab2[8]>tab2[3]) {
+                        if(tab2[8]>tab2[4]) {
+                            if(tab2[8]>tab2[5]) {
+                                if(tab2[8]>tab2[6]) {
+                                    if(tab2[8]>tab2[7]) {
+                                        cheh = 22.0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+turn(cheh);
+
+speed(9.5,1);
+
+    }//fin while
+
+
+    return 0;
+
+} //fin main ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+float lissage(float tab[taille])
+{
+
+    int i=0;
+    float valeur2;
+
+    if(tab[0]>150)tab[0]=-1;
+
+    for(i=1; i<=taille; i++) { //lissage
+        //tab[i]=tab[i] * (asin ( (double)i ));  //projection
+
+
+        if(tab[i]>150)tab[i]=-1; //bride
+
+
+        valeur2 = ((tab[i-1]+0.00001)/(tab[i+1]+0.00001));
+        if ((((tab[i]+0.00001)/(tab[i+1]+0.00001))>1.05) || (((tab[i]+0.00001)/(tab[i+1]+0.00001))<0.95)) {
+            if (((valeur2<1.5)&(valeur2>0.5))) {
+                tab[i] = tab[i-1];
+                //   PC.printf("%lf\n\r",tab[i]);
+
+                //PC.printf("tab[%d] = %lf\t  tab[%d]= %lf\t tab[%d] = %lf\n\r",i-1,tab[i-1],i+1,tab[i+1],i,tab[i]);
+            }
+        }
+    }
+}

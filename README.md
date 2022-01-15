@@ -1,4 +1,9 @@
-# SaphTeamrRacing
+# SaphTeamRacing
 Course de voiture autonomes à laquelle participe l'IUT de cachan.
-Programmes developpés par Guillaume de Maricourt lors de l'année scolaire 2021/22.
-Ces programmes sont réservés aux étudiants de l'IUT de Cachan. 
+Année scolaire 2021/22.
+
+Programmes MBED, Keil et Octave developpés par Guillaume de Maricourt.
+Programmes d'interprétation développés par Antoine Beauvarlet.
+PCB carte puissance et carte traitement développés par Axel Manadi.
+
+Ces programmes et PCB sont réservés aux étudiants de l'IUT de Cachan uniquement.

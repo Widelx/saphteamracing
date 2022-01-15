@@ -1,0 +1,574 @@
+#include <sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define taille 181
+
+
+struct Ensemble{
+float debut;
+float fin;
+    int vide;
+
+float angle_debut;
+float angle_fin;
+
+    float distance_debut;
+float distance_fin;
+float size;
+
+};
+
+
+const char* filename = "input.txt";
+float lissage(float tab[taille]);
+float choix_angle(int cs,float tab[taille],struct Ensemble e1, struct Ensemble e2, struct Ensemble e3, struct Ensemble e4, struct Ensemble e5, struct Ensemble e6 , struct Ensemble e7, struct Ensemble e8, struct Ensemble e9, struct Ensemble e10);
+
+
+int main(int argc, char *argv[])
+{
+    struct Ensemble e1 = {0,0,0};
+    struct Ensemble e2 = {0,0,0};
+    struct Ensemble e3 = {0,0,0};
+    struct Ensemble e4 = {0,0,0};
+    struct Ensemble e5 = {0,0,0};
+    struct Ensemble e6 = {0,0,0};
+    struct Ensemble e7 = {0,0,0};
+    struct Ensemble e8 = {0,0,0};
+    struct Ensemble e9 = {0,0,0};
+    struct Ensemble e10 = {0,0,0};
+
+
+    int i,o;
+    char cs=0;
+    float valeur = 0, angle_roues, angle_roues_final, vitesse;
+
+
+    float tab[taille];
+    float mem[2]{0,0,0};
+
+    int u=0;
+
+//--------------------------------------------------------------                recuperation donées fichier texte
+    FILE *in_file = fopen(filename, "r");
+
+    struct stat sb;
+    stat(filename, &sb);
+
+    char *file_contents = malloc(sb.st_size);
+
+        while (fscanf(in_file, "%[^\n] ", file_contents) != EOF)
+            {
+
+            tab[u] =  atof(file_contents);
+            u++;
+            }
+
+    fclose(in_file);
+//--------------------------------------------------------------
+
+
+for(o=0;o!=80;o++)//while(1) ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    {
+    lissage(tab);
+
+    for(i=1; i!=taille+1; i++)
+        {
+            valeur =((tab[i])/(tab[i+1]));
+
+            e1.debut = 0;
+            e1.angle_debut = 1;
+            e1.distance_debut = tab[1];
+
+            switch(cs){
+
+            case 0:{
+                if (!((valeur<1.05)&&(valeur>0.95))){
+
+
+
+                    e1.fin = i;
+                    e1.angle_fin = i;
+                    e1.distance_fin = tab[i];
+
+                    e2.debut = i+1;
+                    e2.angle_debut = i+1;
+                    e2.distance_debut = tab[i+1];
+
+                    cs = 1;}
+                break;}
+
+            case 1:{
+                if (!((valeur<1.05)&&(valeur>0.95))){
+
+
+                    e2.fin = i;
+                    e2.angle_fin = i;
+                    e2.distance_fin = tab[i];
+
+                    e3.debut = i+1;
+                    e3.angle_debut = i+1;
+                    e3.distance_debut = tab[i+1];
+
+                    cs = 2;}
+                break;}
+
+            case 2:{
+                if (!((valeur<1.05)&&(valeur>0.95))){
+
+
+                    e3.fin = i;
+                    e3.angle_fin = i;
+                    e3.distance_fin = tab[i];
+                if(i<179)
+                        {
+                    e4.debut = i+1;
+                    e4.angle_debut = i+1;
+                    e4.distance_debut = tab[i+1];
+
+                    cs = 3;}}
+                break;}
+
+            case 3:{
+                if (!((valeur<1.05)&&(valeur>0.95))){
+
+
+                    e4.fin = i;
+                    e4.angle_fin = i;
+                    e4.distance_fin = tab[i];
+                if(i<179)
+                        {
+                    e5.debut = i+1;
+                    e5.angle_debut = i+1;
+                    e5.distance_debut = tab[i+1];
+
+
+                    cs = 4;}}
+                break;}
+
+            case 4:{
+                if(!((valeur<1.05)&&(valeur>0.95))){
+
+
+
+                    e5.fin = i;
+                    e5.angle_fin = i;
+                    e5.distance_fin = tab[i];
+                if(i<179)
+                        {
+                    e6.debut = i+1;
+                    e6.angle_debut = i+1;
+                    e6.distance_debut = tab[i+1];
+
+
+                    cs = 5;}}
+                break;}
+
+            case 5:{
+               if(!((valeur<1.05)&&(valeur>0.95))){
+
+
+                    e6.fin = i;
+                    e6.angle_fin = i;
+                    e6.distance_fin = tab[i];
+                if(i<179)
+                        {
+                    e7.debut = i+1;
+                    e7.angle_debut = i+1;
+                    e7.distance_debut = tab[i+1];
+
+
+                    cs = 6;}}
+                break;}
+
+            case 6:{
+               if(!((valeur<1.05)&&(valeur>0.95))){
+
+
+
+                    e7.fin = i;
+                    e7.angle_fin = i;
+                    e7.distance_fin = tab[i];
+                if(i<179)
+                        {
+                    e8.debut = i+1;
+                    e8.angle_debut = i+1;
+                    e8.distance_debut = tab[i+1];
+
+
+                    cs = 7;}}
+                break;}
+
+            case 7:{
+               if(!((valeur<1.05)&&(valeur>0.95))){
+
+
+
+                    e8.fin = i;
+                    e8.angle_fin = i;
+                    e8.distance_fin = tab[i];
+                if(i<179)
+                        {
+                    e9.debut = i+1;
+                    e9.angle_debut = i+1;
+                    e9.distance_debut = tab[i+1];
+
+
+                    cs = 8;}}
+                break;}
+
+            case 8:{
+               if(!((valeur<1.05)&&(valeur>0.95))){
+
+
+
+                    e9.fin = i;
+                    e9.angle_fin = i;
+                    e9.distance_fin = tab[i];
+
+                if(i<179)
+                        {
+                    e10.debut = i+1;
+                    e10.angle_debut = i+1;
+                    e10.distance_debut = tab[i+1];
+
+
+                    cs = 9;}}
+                break;}
+
+            case 9:{
+               if(!((valeur<1.05)&&(valeur>0.95))){
+
+
+
+                    e10.fin = i;
+                    e10.angle_fin = i;
+                    e10.distance_fin = tab[i];
+
+
+                break;}}
+            }
+
+    }//fin for(i=1; i!=taille+1; i++)
+
+
+    angle_roues = choix_angle(cs,tab,e1, e2, e3, e4, e5 ,e6,e7,e8,e9,e10);
+    printf("angle_roues = %lf\t",angle_roues);
+                             *****************************************************
+    mem[2]=mem[1];
+    mem[1]=mem[0];
+    mem[0]=angles_roues ; *****************************************************
+    angle_roues_final = mem[2] + mem[1] + mem[0];
+    angle_roues_final = angle_roues_final /3.0;
+    cs = 0;
+
+for(i=2; i!=taille+1; i++){tab[i]=tab[i+1];} //decalage du passage vers la droite
+
+
+if (angle_roues> 40){vitesse = 0;}
+else{
+if (angle_roues< -40){vitesse = 0;}
+else {
+       if (angle_roues >= 0) vitesse = 100-angle_roues;
+       else vitesse = 100 + angle_roues;
+       }
+
+}
+
+
+printf("vitesse = %lf\n\n",vitesse);
+    }//fin while
+
+return 0;
+
+} //fin main ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+float lissage(float tab[taille])
+{
+
+    int i;
+    float valeur2;
+
+    tab[i]=tab[i] * (asin ( i ));  //projection
+
+    for(i=1; i!=taille; i++)  //lissage
+        {
+        if (i >=1)
+            {
+            valeur2 = ((tab[i-1])/(tab[i+1]));
+            if (((valeur2<1.05)&&(valeur2>0.95))) {tab[i] = ((tab[i-1])+(tab[i+1]))/2.0; }
+            }
+        }
+}
+
+float choix_angle(int cs,float tab[taille],struct Ensemble e1, struct Ensemble e2, struct Ensemble e3, struct Ensemble e4, struct Ensemble e5, struct Ensemble e6 , struct Ensemble e7, struct Ensemble e8, struct Ensemble e9, struct Ensemble e10)
+{
+    int e1_vide = 0,e2_vide = 0,e3_vide = 0,e4_vide = 0,e5_vide = 0,e6_vide = 0,e7_vide = 0,e8_vide = 0,e9_vide = 0,e10_vide = 0;
+    int a=0,i;
+    float result;
+    cs +=1;
+
+    switch(cs)
+        {
+         case 1:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            break;
+            }
+         case 2:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+
+            break;
+            }
+         case 3:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+
+            break;
+            }
+         case 4:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+
+            break;
+            }
+         case 5:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+            if(tab[(int)((e5.angle_fin-e5.angle_debut)/2.0+e5.angle_debut)] == -1){e5_vide = 1;e5.vide = 1;}
+
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+            e5_vide *= (e5.angle_fin-e5.angle_debut);
+
+            break;
+            }
+         case 6:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+            if(tab[(int)((e5.angle_fin-e5.angle_debut)/2.0+e5.angle_debut)] == -1){e5_vide = 1;e5.vide = 1;}
+            if(tab[(int)((e6.angle_fin-e6.angle_debut)/2.0+e6.angle_debut)] == -1){e6_vide = 1;e6.vide = 1;}
+
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+            e5_vide *= (e5.angle_fin-e5.angle_debut);
+            e6_vide *= (e6.angle_fin-e6.angle_debut);
+
+            break;
+            }
+         case 7:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+            if(tab[(int)((e5.angle_fin-e5.angle_debut)/2.0+e5.angle_debut)] == -1){e5_vide = 1;e5.vide = 1;}
+            if(tab[(int)((e6.angle_fin-e6.angle_debut)/2.0+e6.angle_debut)] == -1){e6_vide = 1;e6.vide = 1;}
+            if(tab[(int)((e7.angle_fin-e7.angle_debut)/2.0+e7.angle_debut)] == -1){e7_vide = 1;e7.vide = 1;}
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+            e5_vide *= (e5.angle_fin-e5.angle_debut);
+            e6_vide *= (e6.angle_fin-e6.angle_debut);
+            e7_vide *= (e7.angle_fin-e7.angle_debut);
+
+            break;
+            }
+         case 8:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+            if(tab[(int)((e5.angle_fin-e5.angle_debut)/2.0+e5.angle_debut)] == -1){e5_vide = 1;e5.vide = 1;}
+            if(tab[(int)((e6.angle_fin-e6.angle_debut)/2.0+e6.angle_debut)] == -1){e6_vide = 1;e6.vide = 1;}
+            if(tab[(int)((e7.angle_fin-e7.angle_debut)/2.0+e7.angle_debut)] == -1){e7_vide = 1;e7.vide = 1;}
+            if(tab[(int)((e8.angle_fin-e8.angle_debut)/2.0+e8.angle_debut)] == -1){e8_vide = 1;e8.vide = 1;}
+
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+            e5_vide *= (e5.angle_fin-e5.angle_debut);
+            e6_vide *= (e6.angle_fin-e6.angle_debut);
+            e7_vide *= (e7.angle_fin-e7.angle_debut);
+            e8_vide *= (e8.angle_fin-e8.angle_debut);
+
+            break;
+            }
+         case 9:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+            if(tab[(int)((e5.angle_fin-e5.angle_debut)/2.0+e5.angle_debut)] == -1){e5_vide = 1;e5.vide = 1;}
+            if(tab[(int)((e6.angle_fin-e6.angle_debut)/2.0+e6.angle_debut)] == -1){e6_vide = 1;e6.vide = 1;}
+            if(tab[(int)((e7.angle_fin-e7.angle_debut)/2.0+e7.angle_debut)] == -1){e7_vide = 1;e7.vide = 1;}
+            if(tab[(int)((e8.angle_fin-e8.angle_debut)/2.0+e8.angle_debut)] == -1){e8_vide = 1;e8.vide = 1;}
+            if(tab[(int)((e9.angle_fin-e9.angle_debut)/2.0+e9.angle_debut)] == -1){e9_vide = 1;e9.vide = 1;}
+
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+            e5_vide *= (e5.angle_fin-e5.angle_debut);
+            e6_vide *= (e6.angle_fin-e6.angle_debut);
+            e7_vide *= (e7.angle_fin-e7.angle_debut);
+            e8_vide *= (e8.angle_fin-e8.angle_debut);
+            e9_vide *= (e9.angle_fin-e9.angle_debut);
+
+            break;
+            }
+         case 10:
+            {
+            if(tab[(int)((e1.angle_fin-e1.angle_debut)/2.0+e1.angle_debut)] == -1){e1_vide = 1;e1.vide = 1;}
+            if(tab[(int)((e2.angle_fin-e2.angle_debut)/2.0+e2.angle_debut)] == -1){e2_vide = 1;e2.vide = 1;}
+            if(tab[(int)((e3.angle_fin-e3.angle_debut)/2.0+e3.angle_debut)] == -1){e3_vide = 1;e3.vide = 1;}
+            if(tab[(int)((e4.angle_fin-e4.angle_debut)/2.0+e4.angle_debut)] == -1){e4_vide = 1;e4.vide = 1;}
+            if(tab[(int)((e5.angle_fin-e5.angle_debut)/2.0+e5.angle_debut)] == -1){e5_vide = 1;e5.vide = 1;}
+            if(tab[(int)((e6.angle_fin-e6.angle_debut)/2.0+e6.angle_debut)] == -1){e6_vide = 1;e6.vide = 1;}
+            if(tab[(int)((e7.angle_fin-e7.angle_debut)/2.0+e7.angle_debut)] == -1){e7_vide = 1;e7.vide = 1;}
+            if(tab[(int)((e8.angle_fin-e8.angle_debut)/2.0+e8.angle_debut)] == -1){e8_vide = 1;e8.vide = 1;}
+            if(tab[(int)((e9.angle_fin-e9.angle_debut)/2.0+e9.angle_debut)] == -1){e9_vide = 1;e9.vide = 1;}
+            if(tab[(int)((e10.angle_fin-e10.angle_debut)/2.0+e10.angle_debut)] == -1){e10_vide = 1;e10.vide = 1;}
+
+            e1_vide *= (e1.angle_fin-e1.angle_debut);
+            e2_vide *= (e2.angle_fin-e2.angle_debut);
+            e3_vide *= (e3.angle_fin-e3.angle_debut);
+            e4_vide *= (e4.angle_fin-e4.angle_debut);
+            e5_vide *= (e5.angle_fin-e5.angle_debut);
+            e6_vide *= (e6.angle_fin-e6.angle_debut);
+            e7_vide *= (e7.angle_fin-e7.angle_debut);
+            e8_vide *= (e8.angle_fin-e8.angle_debut);
+            e9_vide *= (e9.angle_fin-e9.angle_debut);
+            e10_vide*= (e10.angle_fin-e10.angle_debut);
+            break;
+            }
+        }
+
+    for(i=0;i != 10;i++)
+    {
+        switch(a)
+            {
+                case 0:
+                    {
+                    if ((e1_vide > e2_vide )&&(e1_vide > e3_vide)&&(e1_vide > e4_vide)&&(e1_vide > e5_vide)&&(e1_vide > e6_vide )&&(e1_vide > e7_vide)&&(e1_vide > e8_vide)&&(e1_vide > e9_vide)&&(e1_vide > e10_vide))
+                        {result = (e1.angle_fin - e1.angle_debut)/2.0+ e1.angle_debut;}
+                    else {  a = 1; }
+                    break;
+                    }
+                case 1:
+                    {
+                    if ((e2_vide > e1_vide )&&(e2_vide > e3_vide)&&(e2_vide > e4_vide)&&(e2_vide > e5_vide)&&(e2_vide > e6_vide )&&(e2_vide > e7_vide)&&(e2_vide > e8_vide)&&(e2_vide > e9_vide)&&(e2_vide > e10_vide))
+                        { result = (e2.angle_fin - e2.angle_debut)/2.0+ e2.angle_debut;}
+                    else  { a = 2;  }
+                    break;
+                    }
+                case 2:
+                    {
+                    if ((e3_vide > e1_vide )&&(e3_vide > e2_vide)&&(e3_vide > e4_vide)&&(e3_vide > e5_vide)&&(e3_vide > e6_vide )&&(e3_vide > e7_vide)&&(e3_vide > e8_vide)&&(e3_vide > e9_vide)&&(e3_vide > e10_vide))
+                        {result = (e3.angle_fin - e3.angle_debut)/2.0+ e3.angle_debut; }
+                    else {  a = 3;}
+                    break;
+                    }
+                case 3:
+                    {
+                    if ((e4_vide > e1_vide )&&(e4_vide > e2_vide)&&(e4_vide > e3_vide)&&(e4_vide > e5_vide)&&(e4_vide > e6_vide )&&(e4_vide > e7_vide)&&(e4_vide > e8_vide)&&(e4_vide > e9_vide)&&(e4_vide > e10_vide))
+                        { result = (e4.angle_fin - e4.angle_debut)/2.0+ e4.angle_debut;}
+                    else { a = 4; }
+                    break;
+                    }
+                case 4:
+                    {
+                    if ((e5_vide > e1_vide )&&(e5_vide > e2_vide)&&(e5_vide > e3_vide)&&(e5_vide > e4_vide)&&(e5_vide > e6_vide )&&(e5_vide > e7_vide)&&(e5_vide > e8_vide)&&(e5_vide > e9_vide)&&(e5_vide > e10_vide))
+                        {result = (e5.angle_fin - e5.angle_debut)/2.0+ e5.angle_debut;}
+                    else { a = 5;  }
+                    break;
+                    }
+                case 5:
+                    {
+                    if ((e6_vide > e1_vide )&&(e6_vide > e2_vide)&&(e6_vide > e3_vide)&&(e6_vide > e4_vide)&&(e6_vide > e5_vide )&&(e6_vide > e7_vide)&&(e6_vide > e8_vide)&&(e6_vide > e9_vide)&&(e6_vide > e10_vide))
+                        {   result = (e6.angle_fin - e6.angle_debut)/2.0+ e6.angle_debut;}
+                    else {a = 6;}
+                    break;
+                    }
+                case 6:
+                    {
+                    if ((e7_vide > e1_vide )&&(e7_vide > e2_vide)&&(e7_vide > e3_vide)&&(e7_vide > e4_vide)&&(e7_vide > e5_vide )&&(e7_vide > e6_vide)&&(e7_vide > e8_vide)&&(e7_vide > e9_vide)&&(e7_vide > e10_vide))
+                        {result = (e7.angle_fin - e7.angle_debut)/2.0+ e7.angle_debut;  }
+                    else{ a = 7; }
+                    break;
+                    }
+                case 7:
+                    {
+                    if ((e8_vide > e1_vide )&&(e8_vide > e2_vide)&&(e8_vide > e3_vide)&&(e8_vide > e4_vide)&&(e8_vide > e5_vide )&&(e8_vide > e6_vide)&&(e8_vide > e7_vide)&&(e8_vide > e9_vide)&&(e8_vide > e10_vide))
+                        { result = (e8.angle_fin - e8.angle_debut)/2.0+ e8.angle_debut;}
+                    else
+                        { a = 8;}
+                    break;
+                    }
+               case 8:
+                    {
+                    if ((e9_vide > e1_vide )&&(e9_vide > e2_vide)&&(e9_vide > e3_vide)&&(e9_vide > e4_vide)&&(e9_vide > e5_vide )&&(e9_vide > e6_vide)&&(e9_vide > e7_vide)&&(e9_vide > e8_vide)&&(e9_vide > e10_vide))
+                        {result = (e9.angle_fin - e9.angle_debut)/2.0+ e9.angle_debut;}
+                    else{a = 9;}
+                    break;
+                    }
+                case 9:
+                    {
+                    if ((e10_vide > e1_vide )&&(e10_vide > e2_vide)&&(e10_vide > e3_vide)&&(e10_vide > e4_vide)&&(e10_vide > e5_vide )&&(e10_vide > e6_vide)&&(e10_vide > e7_vide)&&(e10_vide > e8_vide)&&(e10_vide > e9_vide))
+                        { result = (e10.angle_fin - e10.angle_debut)/2.0+ e10.angle_debut;}
+                    break;
+                    }
+            }
+    }
+
+
+    if (result < 90){result =  90 - result;result = -result ;}
+
+    if (result == 90){result = 0; }
+
+    if (result > 90){ result =   result - 90 ;}
+
+return result;
+}

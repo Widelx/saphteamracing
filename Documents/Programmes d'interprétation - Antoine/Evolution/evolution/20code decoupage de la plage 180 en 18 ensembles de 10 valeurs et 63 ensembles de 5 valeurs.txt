@@ -1,0 +1,153 @@
+#include "mbed.h"
+#include <cstdio>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+#define taille 181
+
+//#include "bluetooth.h"
+#include "car.h"
+
+Serial PC(USBTX,USBRX, 9600);
+#include "lidar.h"
+
+
+struct datapoint {
+
+    float angle;
+    float distance;
+    int ensemble;
+};
+
+float lissage(float tab[taille]);
+float cut10(float tab[181]);
+float cut5(float tab[181]);
+
+int main()
+{
+    initWheels();
+
+
+
+
+    int i,o,k;
+
+
+
+
+    float tab0[181],Angle,angle_roues_final;
+
+    datapoint tab_data[181];
+
+    initLidar();
+    //  initBLE();
+
+    while (1) {
+        getLidarData(tab0);
+        //  sendOverBluetooth(data);
+        datapoint CePoint;
+
+        for(i=0; i!=taille+1; i++) {
+         tab_data[i].distance = tab0[i];
+         tab_data[i].angle = i;
+         tab_data[i].ensemble = 0;
+        }//fin for(i=1; i!=taille+1; i++)
+
+        Angle = cut5(tab0);                         // angle est une donnée comprise entre 0° et 180°   90° est la normale de la voiture
+        angle_roues_final = Angle - 90.0;           // decalage pour avoir la normale à 0°      >0 = à gauche    <0 = à droite
+       
+        if(angle_roues_final<-20.0)                 //bride négative à -20°
+            {angle_roues_final=-20.0;}
+           
+        if(angle_roues_final>20.0)                 //bride positive à 20°
+            {angle_roues_final=20.0;}
+       
+
+        turn(angle_roues_final);                    //angle entre -22(gauche) et 22(droite)
+
+    }//fin while
+
+
+    return 0;
+
+} //fin main ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+float lissage(float tab[taille])
+{
+
+    int i=0;
+    float valeur2;
+
+    if(tab[0]>150)tab[0]=-1;
+
+    for(i=1; i<=taille; i++) { //lissage
+        //tab[i]=tab[i] * (asin ( (double)i ));  //projection
+
+
+        if(tab[i]>150)tab[i]=-1; //bride
+
+
+        valeur2 = ((tab[i-1]+0.00001)/(tab[i+1]+0.00001));
+        if ((((tab[i]+0.00001)/(tab[i+1]+0.00001))>1.05) || (((tab[i]+0.00001)/(tab[i+1]+0.00001))<0.95)) {
+            if (((valeur2<1.5)&(valeur2>0.5))) {
+                tab[i] = tab[i-1];
+                //   PC.printf("%lf\n\r",tab[i]);
+
+                 //PC.printf("tab[%d] = %lf\t  tab[%d]= %lf\t tab[%d] = %lf\n\r",i-1,tab[i-1],i+1,tab[i+1],i,tab[i]);
+            }
+        }
+    }
+}
+
+
+float cut10(float tab[181])
+{
+    int i,k,angle =0;
+    float g,tab2[18];                               //18 pour avoir 18 paquets de 10
+         
+          for(i=0; i!=18;i++)
+        {
+            for(k=0;k!=10;k++){g+=tab[k+10*i];}     //on somme 10 valeurs
+            g = g/10.0;                             // et on prend la distance moyenne
+            tab2[i] =g;                             //tab[i] represente la moyenne de la distance de 10 points
+        }
+
+for(i=1;i!=19;i++)
+    {
+        if(tab2[i]> tab2[i-1])                      //on recupere lemplacement de la valeur moyenne la plus grande
+            {
+                angle = i*10 + 5;                   //on restitue l'angle correspondant (paquets de 10 dont la moitiée est 5)
+            }
+    }      
+return angle;
+}
+
+
+
+float cut5(float tab[181])
+{
+    int i,k,angle =0;
+    float g,tab2[36];                               //36 pour avoir 36 paquets de 5
+         
+          for(i=0; i!=36;i++)
+        {
+            for(k=0;k!=5;k++) {g+=tab[k+5*i];}      //on somme 5 valeurs
+            g = g/5.0;                              // et on prend la distance moyenne
+            tab2[i] =g;                             //tab[i] represente la moyenne de la distance de 5 points
+        }
+
+for(i=1;i!=37;i++)
+{
+    if(tab2[i]> tab2[i-1])                          //on recupere lemplacement de la valeur moyenne la plus grande
+        {
+            angle = i*5 + 2.5;                      //on restitue l'angle correspondant (paquets de 10 dont la moitiée est 5)
+        }      
+}
+return angle;              
+}
+
+
