@@ -1479,7 +1479,7 @@
   (symbol (lib_id "power:GND") (at 148.59 60.96 270) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 6e413ce5-ddaf-479d-ab31-d32d62b0c2f3)
-    (property "Reference" "#PWR?" (id 0) (at 142.24 60.96 0)
+    (property "Reference" "#PWR0102" (id 0) (at 142.24 60.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 144.78 60.9599 90)
@@ -1535,7 +1535,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x06") (at 182.88 60.96 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 7b98ef29-43ae-47e9-9801-dab1ae51395e)
-    (property "Reference" "BLE" (id 0) (at 185.42 60.9599 0)
+    (property "Reference" "BLE1" (id 0) (at 185.42 60.9599 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "Conn_01x06" (id 1) (at 185.42 63.4999 0)
@@ -2024,6 +2024,9 @@
     (path "/20936c2c-a24c-45e6-8dd1-2c0b3b42ec77"
       (reference "#PWR0101") (unit 1) (value "GND") (footprint "")
     )
+    (path "/6e413ce5-ddaf-479d-ab31-d32d62b0c2f3"
+      (reference "#PWR0102") (unit 1) (value "GND") (footprint "")
+    )
     (path "/ac288dec-f1d0-42f2-a16f-dee351c36ca1"
       (reference "#PWR0103") (unit 1) (value "GND") (footprint "")
     )
@@ -2075,9 +2078,6 @@
     (path "/f4e63837-2f21-49d9-82d7-0707b1ca7261"
       (reference "#PWR0119") (unit 1) (value "GND") (footprint "")
     )
-    (path "/6e413ce5-ddaf-479d-ab31-d32d62b0c2f3"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
     (path "/f87ce03a-03d7-4533-9c1c-b0f2552e1cd0"
       (reference "A1") (unit 1) (value "Conn_01x02") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
     )
@@ -2097,7 +2097,7 @@
       (reference "B3") (unit 1) (value "Conn_01x02") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
     )
     (path "/7b98ef29-43ae-47e9-9801-dab1ae51395e"
-      (reference "BLE") (unit 1) (value "Conn_01x06") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical")
+      (reference "BLE1") (unit 1) (value "Conn_01x06") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical")
     )
     (path "/6c9a076d-21ce-48cc-a4d7-55822e95fa95"
       (reference "C470") (unit 1) (value "C") (footprint "FootprintGamelGe2:C_Rect_L7.0mm_W2.5mm_P5.00mm")
