@@ -2,12 +2,9 @@
 #define _bluetooth_h_
 
 #include "mbed.h"
+#include "pinmap.h"
 
 /*****Paramètres pouvant être modifiés*****/
-// Bluetooth TX/RX
-#define RXBLE USBRX
-#define TXBLE USBTX
-
 #define BLE_BUFFER_SIZE 5000
 /*****Paramètres pouvant être modifiés*****/
 /*

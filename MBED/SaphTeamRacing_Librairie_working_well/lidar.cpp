@@ -1,8 +1,8 @@
 #include "lidar.h"
 
 // Instances du programme
-RawSerial SLidar(TXLIDAR, RXLIDAR, 115200);
-PwmOut PWMLidar(PIN_PWM);
+RawSerial SLidar(TXLidar, RXLidar, 115200);
+PwmOut PWMLidar(PIN_PWM_Lidar);
 
 // Variable globale
 bool fullturn;

@@ -2,12 +2,9 @@
 #define _lidar_h_
 
 #include "mbed.h"
+#include "pinmap.h"
 
 /*****Paramètres pouvant être modifiés*****/
-// Lidar TX/RX
-#define TXLIDAR PF_7
-#define RXLIDAR PF_6
-
 // Taille des buffers,
 #define POINT_BUFFER_SIZE 5000
 #define RAW_BUFFER_SIZE 5000
@@ -18,7 +15,6 @@
 
 // Vitesse de rotation du LiDAR
 #define PWMLIDAR 0.3
-#define PIN_PWM PA_0
 /*****Paramètres pouvant être modifiés*****/
 /*
  *

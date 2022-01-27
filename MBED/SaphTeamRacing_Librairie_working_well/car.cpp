@@ -1,7 +1,7 @@
 #include "car.h"
 
-PwmOut drivingWheel(PIN_DRIVING);
-PwmOut turnWheel(PIN_TURN);
+PwmOut drivingWheel(PINServo);
+PwmOut turnWheel(PINMotor);
 
 // A faire : brider les accélérations trop violentes (et les freinages ?) !!!!
 // Variables static de vitesse et variable de vitesse désirée
