@@ -2,7 +2,7 @@
 #define _lidar_h_
 
 #include "mbed.h"
-#include "pinmap.h"
+#include "pinmapF746NG.h"
 
 /*****Paramètres pouvant être modifiés*****/
 // Taille des buffers,

@@ -2,7 +2,7 @@
 #define _bluetooth_h_
 
 #include "mbed.h"
-#include "pinmap.h"
+#include "pinmapF746NG.h"
 
 /*****Paramètres pouvant être modifiés*****/
 #define BLE_BUFFER_SIZE 5000

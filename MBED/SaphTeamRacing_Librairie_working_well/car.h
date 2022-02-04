@@ -2,7 +2,7 @@
 #define _car_h_
 
 #include "mbed.h"
-#include "pinmap.h"
+#include "pinmapF746NG.h"
 
 #define PIN_TURN PB_8
 #define PIN_DRIVING PB_9

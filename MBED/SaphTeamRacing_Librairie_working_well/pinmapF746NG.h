@@ -1,5 +1,5 @@
-#ifndef _pinmap_h_
-#define _pinmap_h_
+#ifndef _pinmapF746NG_h_
+#define _pinmapF746NG_h_
 
 // Lidar
 #define TXLidar PF_6
