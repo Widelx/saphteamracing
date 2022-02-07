@@ -10,7 +10,7 @@ Ce programme écrit pour Octave permet de visualiser les données collectées pa
 1. Trouver le bon port COM
   
 Il faut aller dans les périphériques connectés pour connaitre le port COM utilisé par votre PC pour la communication avec le module bluetooth.
-Le programme est à lancer en remplaçcant la valeur du port COM sur lequel est connecté le module bluetooth par le port réel.
+Le programme est à lancer en remplaçant la valeur du port COM sur lequel est connecté le module bluetooth par le port réel.
 ```
 portCom = "COM10"; (par défaut)
 portCom = "COM25";
