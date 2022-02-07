@@ -1,9 +1,9 @@
 # Prise en main
 
-Script réalisé à l'IUT de Cachan pour Octave 6.3.0.
-Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing, course de voiture autonomes.
+Script réalisé à l'IUT de Cachan pour Octave 6.3.0.  
+Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing, course de voiture autonomes.  
 
-Ce programme écrit pour Octave permet de visualiser les données collecteés par le LiDAR (voir /MBED/README).
+Ce programme écrit pour Octave permet de visualiser les données collectées par le LiDAR (voir le dossier [MBED](https://github.com/Widelx/saphteamracing/tree/main/MBED)).
 
 Le programme est à lancer en remplaçcant la valeur du port COM sur lequel est connecté le module bluetooth par le port réel.
 Exemple :
