@@ -11,7 +11,7 @@ Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing,
 La librairie "lidar" permet d'utiliser un capteur LiDAR de la marque SLAMTEC en récupérant un jeu de données au degré prêt dans un tableau fourni par l'utilisateur.  
 **⚠️ ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).
 
-2fonctions sont à utiliser :
+Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivantes.
 ```
 initLidar();
 getLidarData(tab);
@@ -29,7 +29,7 @@ La librairie "bluetooth" permet d'utiliser cette fonctionnalité en parrallèle 
 **⚠️ ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).  
 _Consistance entre les deux librairies._
 
-Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivantes :
+Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivantes.
 ```
 initBLE();
 sendOverBluetooth(tab);
@@ -42,7 +42,6 @@ La librairie est configurée de base pour transmettre en liaison filaire. Il ne 
 
 Cependant si un problème subsiste veuillez effectuer les étapes suivantes.
 Modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE` par les valeurs des pins à utiliser (dans notre cas `USBRX` et `USBTX`)
-Exemple :
 ```
 #define RXBLE USBRX
 #define TXBLE USBTX
@@ -51,8 +50,6 @@ Exemple :
 2. Liaison Bluetooth  
 La librairie n'est pas configurée de base pour émettre en bluetooth. Il faut pour cela connecter un module qui peut communiquer en RS232 et à 115200 bauds.  
 Il faut modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE` par les valeurs des pins connectés sur le module bluetooth.
-
-Exemple :
 ```
 #define RXBLE PA_0
 #define TXBLE PA_1
