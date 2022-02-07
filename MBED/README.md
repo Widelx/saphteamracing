@@ -4,29 +4,29 @@ Librairies développées à l'IUT de Cachan pour MBED OS v5.15 en C++ (issu de c
 Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing, course de voiture autonomes.  
 
 **/!\ Utiliser la librairie SaphTeamRacing_Librairie_working_well** : l'autre dossier traite de l'algorithme vu en annexe du rapport mais n'est pas une version stable.  
-/!\ Pour voir un exemple d'un programme utilisant correctement la librairie veuillez vous référer au fichier "main.cpp".  
+/!\ Pour voir un exemple d'un programme utilisant correctement la librairie veuillez vous référer au fichier `main.cpp`.  
 
 
 ### Lidar
 La librairie "lidar" permet d'utiliser un capteur LiDAR de la marque SLAMTEC en récupérant un jeu de données au degré prêt dans un tableau fourni par l'utilisateur.  
-**ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type "float" et de taille 181 (ici tab).
+**ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).
 
 2fonctions sont à utiliser :
 ```
 initLidar();
 getLidarData(tab);
 ```
-Il faut bien entendu ajouter les fichier `lidar.cpp` et `lidar.h` dans le dossier du programme main.cpp et les inclure dans le projet.  
-Certaines propriétées peuvent être directement modifiées dans le ficher .h le rapport cyclique du PWM ou la distance maximale d'acquisition.
+Il faut bien entendu ajouter les fichier `lidar.cpp` et `lidar.h` dans le dossier du programme `main.cpp` et les inclure dans le projet.  
+Certaines propriétées peuvent être directement modifiées dans le ficher .h, comme le rapport cyclique du PWM ou la distance maximale d'acquisition.
 
 
 ### BLE (Bluetooth Low Energy)
 Par ailleurs les données du LiDAR peuvent être visualisées via une connection série. Celle-ci peut être :
 - bluetooth
 - filaire
-La librairie "bluetooth" permet d'utiliser cette fonctionnalité en parrallèle avec un [script](https://github.com/Widelx/saphteamracing/tree/main/Octave) créé sur [Octave](https://www.gnu.org/software/octave/index)(6.3.0) disponible dans ce repoistory.
+La librairie "bluetooth" permet d'utiliser cette fonctionnalité en parrallèle avec un [script](https://github.com/Widelx/saphteamracing/tree/main/Octave) réalisé sur [Octave](https://www.gnu.org/software/octave/index)(6.3.0) _(disponible dans ce repoistory)_.
 
-**ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type "float" et de taille 181 (ici tab).  
+**ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).  
 _Consistance entre les deux librairies._
 
 Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivantes :
@@ -34,7 +34,7 @@ Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivant
 initBLE();
 sendOverBluetooth(tab);
 ```
-Il faut bien entendu ajouter les fichier `bluetooth.cpp` et `bluetooth.h` dans le dossier du programme main.cpp et les inclure dans le projet.
+Il faut bien entendu ajouter les fichier `bluetooth.cpp` et `bluetooth.h` dans le dossier du programme `main.cpp` et les inclure dans le projet.
 
 Comment utiliser les deux types liaisons :
 1. Liaison filaire
