@@ -20,10 +20,10 @@ Il faut bien entendu ajouter les fichier `lidar.cpp` et `lidar.h` dans le dossie
 Certaines propriétées peuvent être directement modifiées dans le ficher .h, comme le rapport cyclique du PWM ou la distance maximale d'acquisition.
 
 
-### BLE (Bluetooth Low Energy)
+### BLE (Bluetooth Low Energy)  
 Par ailleurs les données du LiDAR peuvent être visualisées via une connection série. Celle-ci peut être :
 - bluetooth
-- filaire
+- filaire  
 La librairie "bluetooth" permet d'utiliser cette fonctionnalité en parrallèle avec un [script](https://github.com/Widelx/saphteamracing/tree/main/Octave) réalisé sur [Octave](https://www.gnu.org/software/octave/index)(6.3.0) _(disponible dans ce repoistory)_.
 
 **⚠️ ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).  
@@ -37,7 +37,7 @@ sendOverBluetooth(tab);
 Il faut bien entendu ajouter les fichier `bluetooth.cpp` et `bluetooth.h` dans le dossier du programme `main.cpp` et les inclure dans le projet.
 
 Comment utiliser les deux types liaisons :
-1. Liaison filaire
+1. Liaison filaire  
 La librairie est configurée de base pour transmettre en liaison filaire. Il ne devrait pas y avoir à faire ces modificcations. 
 
 Cependant si un problème subsiste veuillez effectuer les étapes suivantes.
@@ -48,7 +48,7 @@ Exemple :
 #define TXBLE USBTX
 ```
 
-2. Liaison Bluetooth
+2. Liaison Bluetooth  
 La librairie n'est pas configurée de base pour émettre en bluetooth. Il faut pour cela connecter un module qui peut communiquer en RS232 et à 115200 bauds.  
 Il faut modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE` par les valeurs des pins connectés sur le module bluetooth.
 
@@ -58,7 +58,7 @@ Exemple :
 #define TXBLE PA_1
 ```
 
-####### Visualisation des données en Bluetooth  
+###### Visualisation des données en Bluetooth  
 Veuillez vous référer à la section [Octave](https://github.com/Widelx/saphteamracing/tree/main/Octave) de ce git.
 
 ### Car
