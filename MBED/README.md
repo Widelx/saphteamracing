@@ -4,12 +4,12 @@ Librairies développées à l'IUT de Cachan pour MBED OS v5.15 en C++ (issu de c
 Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing, course de voiture autonomes.  
 
 **⚠️ Utiliser la librairie SaphTeamRacing_Librairie_working_well** : l'autre dossier traite de l'algorithme vu en annexe du rapport mais n'est pas une version stable.  
-/!\ Pour voir un exemple d'un programme utilisant correctement la librairie veuillez vous référer au fichier `main.cpp`.  
+⚠️ Pour voir un exemple d'un programme utilisant correctement la librairie veuillez vous référer au fichier `main.cpp`.  
 
 
 ### Lidar
 La librairie "lidar" permet d'utiliser un capteur LiDAR de la marque SLAMTEC en récupérant un jeu de données au degré prêt dans un tableau fourni par l'utilisateur.  
-**ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).
+**⚠️ ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).
 
 2fonctions sont à utiliser :
 ```
@@ -26,7 +26,7 @@ Par ailleurs les données du LiDAR peuvent être visualisées via une connection
 - filaire
 La librairie "bluetooth" permet d'utiliser cette fonctionnalité en parrallèle avec un [script](https://github.com/Widelx/saphteamracing/tree/main/Octave) réalisé sur [Octave](https://www.gnu.org/software/octave/index)(6.3.0) _(disponible dans ce repoistory)_.
 
-**ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).  
+**⚠️ ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).  
 _Consistance entre les deux librairies._
 
 Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivantes :
