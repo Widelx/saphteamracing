@@ -24,11 +24,10 @@ Certaines propriétées peuvent être directement modifiées dans le ficher .h, 
 Par ailleurs les données du LiDAR peuvent être visualisées via une connection série. Celle-ci peut être :
 - bluetooth
 - filaire  
+
 La librairie "bluetooth" permet d'utiliser cette fonctionnalité en parrallèle avec un [script](https://github.com/Widelx/saphteamracing/tree/main/Octave) réalisé sur [Octave](https://www.gnu.org/software/octave/index)(6.3.0) _(disponible dans ce repoistory)_.
 
 **⚠️ ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type `float` et de taille 181 (ici tab).  
-_Consistance entre les deux librairies._
-
 Il faut pour bénéficier de cette fonctionnalité ajouter les fonctions suivantes.
 ```
 initBLE();
@@ -38,6 +37,7 @@ Il faut bien entendu ajouter les fichier `bluetooth.cpp` et `bluetooth.h` dans l
 
 Comment utiliser les deux types liaisons :
 1. Liaison filaire  
+
 La librairie est configurée de base pour transmettre en liaison filaire. Il ne devrait pas y avoir à faire ces modificcations. 
 
 Cependant si un problème subsiste veuillez effectuer les étapes suivantes.
@@ -48,6 +48,7 @@ Modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE` par les
 ```
 
 2. Liaison Bluetooth  
+
 La librairie n'est pas configurée de base pour émettre en bluetooth. Il faut pour cela connecter un module qui peut communiquer en RS232 et à 115200 bauds.  
 Il faut modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE` par les valeurs des pins connectés sur le module bluetooth.
 ```
