@@ -1,4 +1,4 @@
-### SaphTeamRacing
+# SaphTeamRacing
 Course de voiture autonomes à laquelle participe l'IUT de cachan.
 Année scolaire 2021/22.
 
