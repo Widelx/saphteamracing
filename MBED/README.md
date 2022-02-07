@@ -58,8 +58,8 @@ Exemple :
 #define TXBLE PA_1
 ```
 
-#######Visualisation des données en Bluetooth  
-Veuillez vous référer à la section [OCTAVE](https://github.com/Widelx/saphteamracing/tree/main/Octave) de ce git.
+####### Visualisation des données en Bluetooth  
+Veuillez vous référer à la section [Octave](https://github.com/Widelx/saphteamracing/tree/main/Octave) de ce git.
 
 ### Car
 La librairie "car" permet de contrôler la voiture. Les fichiers ".h" permettent de configurer les PINs de contrôle des signaux PWM.
