@@ -55,7 +55,7 @@ Il faut modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE`
 #define TXBLE PA_1
 ```
 
-###### Visualisation des données en Bluetooth  
+##### Visualisation des données en Bluetooth  
 Veuillez vous référer à la section [Octave](https://github.com/Widelx/saphteamracing/tree/main/Octave) de ce git.
 
 ### Car
