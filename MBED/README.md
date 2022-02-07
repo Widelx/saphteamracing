@@ -1,4 +1,4 @@
-#Prise en main
+# Prise en main
 
 Librairies développées à l'IUT de Cachan pour MBED OS v5.15 en C++ (issu de connaissances en C et non de C++).
 Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing, course de voiture autonomes.
@@ -7,7 +7,7 @@ Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing,
 /!\ Pour voir un exemple d'un programme utilisant correctement la librairie veuillez vous référer au fichier "main.cpp".
 
 
-###Lidar
+### Lidar
 La librairie "lidar" permet d'utiliser un capteur LiDAR de la marque SLAMTEC en récupérant un jeu de données au degré prêt dans un tableau fourni par l'utilisateur.
 **ATTENTION :** le tableau fourni par l'utilisateur doit ABSOLUMENT être de type "float" et de taille 181 (ici tab).
 
@@ -20,7 +20,7 @@ Il faut bien entendu ajouter les fichier `lidar.cpp` et `lidar.h` dans le dossie
 Certaines propriétées peuvent être directement modifiées dans le ficher .h le rapport cyclique du PWM ou la distance maximale d'acquisition.
 
 
-###BLE (Bluetooth Low Energy)
+### BLE (Bluetooth Low Energy)
 Par ailleurs les données du LiDAR peuvent être visualisées via une connection série. Celle-ci peut être :
 - bluetooth
 - filaire
@@ -61,5 +61,5 @@ Exemple :
 Visualisation des données en Bluetooth 
 Veuillez vous référer à la section [OCTAVE](https://github.com/Widelx/saphteamracing/tree/main/Octave) de ce git.
 
-###Car
+### Car
 La librairie "car" permet de contrôler la voiture. Les fichiers ".h" permettent de configurer les PINs de contrôle des signaux PWM.
