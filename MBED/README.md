@@ -58,6 +58,7 @@ Il faut modifier dans le fichier `bluetooth.h` les valeurs de `TXBLE` et `RXBLE`
 
 ##### Visualisation des données en Bluetooth  
 Veuillez vous référer à la section [Octave](https://github.com/Widelx/saphteamracing/tree/main/Octave) de ce git.
+![Visualisation bluetooth]()
 
 ### Car
 La librairie "car" permet de contrôler la voiture. Les fichiers ".h" permettent de configurer les PINs de contrôle des signaux PWM.
