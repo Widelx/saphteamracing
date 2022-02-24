@@ -1,7 +1,6 @@
 #include "bluetooth.h"
 
 RawSerial BLE(TXBle, RXBle, 115200);
-DigitalIn Status(PIN_Status_Ble);
 
 CircularBuffer<char, BLE_BUFFER_SIZE> BLEBuffer;
 
@@ -31,27 +30,24 @@ void putData(void) {
 
 /*****************SendData******************/
 void sendOverBluetooth(float tab_data[]) {
-  int statusBle = Status.read();
-  if (statusBle == 1) {
-    unsigned char range1, range2;
-    unsigned short range;
-    // Je converti les données de distance sur un short pour ne pas trop perdre
-    // en précision
-    for (int i = 0; i <= PRECISION; i++) {
-      range = (unsigned short)(tab_data[i] * 10);
-      range1 = (unsigned char)range & 0xFF;
-      range2 = (unsigned char)(range >> 8) & 0xFF;
-      // J'ajoute les valeurs au buffer
-      BLEBuffer.push(range1);
-      BLEBuffer.push(range2);
-      BLEBuffer.push((unsigned char)i);
-    }
-    // Fin de trame
-    BLEBuffer.push(0xA5);
-    BLEBuffer.push(0xA5);
-    BLEBuffer.push(0xA5);
-    // Autorise l'interruption sur TX
-    BLE.enable_output(true);
+  unsigned char range1, range2;
+  unsigned short range;
+  // Je converti les données de distance sur un short pour ne pas trop perdre en
+  // précision
+  for (int i = 0; i <= PRECISION; i++) {
+    range = (unsigned short)(tab_data[i] * 10);
+    range1 = (unsigned char)range & 0xFF;
+    range2 = (unsigned char)(range >> 8) & 0xFF;
+    // J'ajoute les valeurs au buffer
+    BLEBuffer.push(range1);
+    BLEBuffer.push(range2);
+    BLEBuffer.push((unsigned char)i);
   }
+  // Fin de trame
+  BLEBuffer.push(0xA5);
+  BLEBuffer.push(0xA5);
+  BLEBuffer.push(0xA5);
+  // Autorise l'interruption sur TX
+  BLE.enable_output(true);
 }
 /*****************SendData******************/

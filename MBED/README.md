@@ -3,7 +3,7 @@
 Librairies développées à l'IUT de Cachan pour MBED OS v5.15 en C++ (issu de connaissances en C et non de C++).  
 Développée par Guillaume de Maricourt en 2021/22 sur le projet SaphTeamRacing, course de voiture autonomes.  
 
-**⚠️ Utiliser la librairie SaphTeamRacing_Librairie_working_well** : l'autre dossier traite de l'algorithme vu en annexe du rapport mais n'est pas une version stable.  
+**⚠️ Utiliser la librairie SaphTeamRacing_Librairie** : l'autre dossier traite de l'algorithme vu en annexe du rapport mais n'est pas une version stable.  
 ⚠️ Pour voir un exemple d'un programme utilisant correctement la librairie veuillez vous référer au fichier `main.cpp`.  
 
 

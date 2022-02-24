@@ -81,7 +81,7 @@ bool isQualityEnough(char charQ);
 float convertAngle(float angle);
 
 // SendData
-void sendToProcess(float* tab_data);
+void sendToProcess(float *tab_data);
 /*******Fonctions PRIVEES******/
 
 #endif
